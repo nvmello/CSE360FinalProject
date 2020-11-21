@@ -21,12 +21,9 @@ public class LoadRoster {
         		System.out.println(temp[i]);
         	}
         }
-        
 		}
 		catch(IOException io) {
 			io.printStackTrace();
 		}
-		
 	}
-	
 }
