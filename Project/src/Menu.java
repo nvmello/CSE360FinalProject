@@ -44,12 +44,11 @@ public class Menu extends JFrame implements ActionListener {
      * Currently reads in a file path from the user when "Load Roster" button is clicked
      * File path on Nicks PC for testing: " C:\Users\nvmor\Desktop\input1.csv "
      */
-    public void actionPerformed(ActionEvent e) {
+     public void actionPerformed(ActionEvent e) {
         Scanner input = new Scanner(System.in);  // Create a Scanner object
         LoadRoster newRost = new LoadRoster();  //Creates a new load roster obj
-
-        System.out.println("Please enter a file path to a CSV: ");  //prompt
-        String filePath = input.nextLine();     //gets file path from a user in the form of a string
+        
+        String filePath = JOptionPane.showInputDialog("Please enter a file path to a CSV:");     //dialog box that gets file path from a user in the form of a string
         newRost.readCSV(filePath);
     }
 }
