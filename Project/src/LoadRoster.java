@@ -1,4 +1,6 @@
+import javax.swing.*;
 import java.io.*;
+import java.util.Scanner;
 
 public class LoadRoster {
 	private static final String delimeter = ",";
@@ -42,4 +44,5 @@ public class LoadRoster {
 	public String[][] getData(){
 		return data;
 	}
+
 }
