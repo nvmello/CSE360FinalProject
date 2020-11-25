@@ -2,28 +2,44 @@ import java.io.*;
 
 public class LoadRoster {
 	private static final String delimeter = ",";
+	private static final int columnNum = 6;
 	private static String line = "";
+	private static String[][] data;
 
-	public static void readCSV(String csv) {
+	public static void readCSV(File csv) {
+		int column, row = 0;
+		int rowNum=0;
 		
 		try {
-		File file = new File(csv);
-		FileReader read = new FileReader(file);
+		FileReader read = new FileReader(csv);
         BufferedReader buffer = new BufferedReader(read);
-        String[] temp;
         
-        while((line = buffer.readLine()) != null) {
-        	temp = line.split(delimeter);
+        while(buffer.readLine() != null) { rowNum++;}	//reading number of lines in file
+        data = new String[rowNum][columnNum];	//initializing the 2d array
+        
+        buffer.close();		//clearing the buffer to read the file again
+        FileReader file = new FileReader(csv);
+        buffer = new BufferedReader(file);	
+        
+        while((line = buffer.readLine()) != null) {	//reads until end of file
         	
-        	//right now just printing out the file word for word
-        	//change later 
-        	for(int i = 0;i < temp.length;++i) {
-        		System.out.println(temp[i]);
+        	for (column =0;column < columnNum;column++) {
+        		data[row] = line.split(delimeter);	//filling array with file info
         	}
+        	
+        	row++;
         }
+        
+        buffer.close();
+        
 		}
 		catch(IOException io) {
 			io.printStackTrace();
 		}
+		
+	}
+	
+	public String[][] getData(){
+		return data;
 	}
 }
