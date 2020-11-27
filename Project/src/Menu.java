@@ -6,11 +6,20 @@ import java.util.Scanner;  // Import the Scanner class
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFileChooser;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
-public class Menu extends JFrame implements ActionListener {
-    JFrame jf;
-    JFileChooser fc;
+import javax.swing.table.DefaultTableModel;
 
+
+public class Menu extends JFrame implements ActionListener,MenuListener {
+    JFrame jf;
+    JTable t; 
+    JScrollPane js;
+    JFileChooser fc;
+    DefaultTableModel model;
+    LoadRoster newRost;
+    
     public Menu() {
         jf = new JFrame();
         jf.setTitle("CSE360 Final Project");
@@ -28,6 +37,7 @@ public class Menu extends JFrame implements ActionListener {
 
         JMenu about = new JMenu("About");
         jmb.add(about);
+        about.addMenuListener(this);
 
         JMenuItem load = new JMenuItem("Load Roster", KeyEvent.VK_O);
         file.add(load);
@@ -70,7 +80,7 @@ public class Menu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if("Load Roster".equals(e.getActionCommand())){
             Scanner input = new Scanner(System.in);  // Create a Scanner object
-            LoadRoster newRost = new LoadRoster();  //Creates a new load roster obj
+            newRost = new LoadRoster();  //Creates a new load roster obj
 
 
             JFileChooser fileChooser = new JFileChooser(); //JFileChooser points to user's default directory
@@ -83,16 +93,35 @@ public class Menu extends JFrame implements ActionListener {
                 newRost.readCSV(fileChooser.getSelectedFile());	//passing in the selected file to be read
             }
 
-            String[] headers = {"ID","First Name","Last Name","Program and Plan","Academic Level","ASURITE"};
+            String[] headers = {"ID","First Name","Last Name","Program","Academic Level","ASURITE"};
 
-            JTable t = new JTable(newRost.getData(),headers); //filling in the JTable with file info
-
-            JScrollPane js = new JScrollPane(t);
-            jf.add(js);
+            model = new DefaultTableModel(newRost.getData(),headers); //filling in the JTable with file info
+            t = new JTable(model);
+            
+           js = new JScrollPane(t);
+           t.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+           jf.add(js);
         }
 
         if("Add Attendance".equals(e.getActionCommand())){
-            System.out.println("It works2!");
+        	AddAttendance newAtt = new AddAttendance();
+        	
+        	JFileChooser fileChooser = new JFileChooser(); //JFileChooser points to user's default directory
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Only .csv files","csv");
+            fileChooser.setFileFilter(filter);	//only allowing csv file extensions
+
+            int result = fileChooser.showOpenDialog(null);
+            if(result == JFileChooser.APPROVE_OPTION) {          	
+                newAtt.setAttendance(fileChooser.getSelectedFile(),newRost.getData());
+            }
+            
+            //Replace this with a date picker
+            String date = JOptionPane.showInputDialog("DATE");
+            
+            String []newColumn = newAtt.getAttendance();
+            model.addColumn(date,newColumn);	//add a new column to the JTable with the specified date
+            newAtt.extraUser();		//showing the user attendee information was loaded
+            
         }
 
         if("Save".equals(e.getActionCommand())){
@@ -103,4 +132,25 @@ public class Menu extends JFrame implements ActionListener {
         }
 
     }
+
+
+    //dialog box for the about section
+	@Override
+	public void menuSelected(MenuEvent e) {
+		JOptionPane.showMessageDialog(jf, "Team Information:\n"
+    			+ "");
+	}
+
+
+	@Override
+	public void menuDeselected(MenuEvent e) {
+		
+	}
+
+
+	@Override
+	public void menuCanceled(MenuEvent e) {
+		
+		
+	}
 }
