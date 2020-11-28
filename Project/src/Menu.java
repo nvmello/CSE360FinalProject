@@ -1,10 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;  // Import the Scanner class
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
@@ -124,10 +128,31 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
             
         }
 
-        if("Save".equals(e.getActionCommand())){
-            System.out.println("It works!3");
+        if("Save".equals(e.getActionCommand())) {
+            File saveFile = fc.getSelectedFile();
+            //writing to a file
+            int userSelection = fc.showSaveDialog(this);
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fc.getSelectedFile();
+                try {
+                    FileWriter fw = new FileWriter(saveFile);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    for (int i = 0; i < t.getRowCount(); i++) {
+                        for (int j = 0; i < t.getColumnCount(); j++) {
+                            //writing
+                            bw.write(t.getValueAt(i, j).toString() + ",");
+                        }
+                        bw.newLine();//RECORD PER LINE
+                    }
+                    bw.close();
+                    fw.close();
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(this, "ERRPR", "ERROR MESSAGE", JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
         }
-        if("Plot Data".equals(e.getActionCommand())){
+            if("Plot Data".equals(e.getActionCommand())){
             System.out.println("It works!4");
         }
 
