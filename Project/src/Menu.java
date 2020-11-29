@@ -16,13 +16,19 @@ import javax.swing.table.TableModel;
 
 
 public class Menu extends JFrame implements ActionListener,MenuListener {
-    JFrame frame;
-    JTable table;
-    JScrollPane scrollPane;
-    JFileChooser chooser;
-    DefaultTableModel model;
-    LoadRoster newRost;
-    
+
+
+
+    JFrame frame;   //
+    JTable table;   //
+    JScrollPane scrollPane; //
+    JFileChooser chooser;   //
+    DefaultTableModel model;    //
+    LoadRoster newRost;     //
+
+    /**
+     *
+     */
     public Menu() {
         frame = new JFrame();
         frame.setTitle("CSE360 Final Project");
@@ -71,7 +77,10 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
 
     }
 
-
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args){
         Menu menu = new Menu();
     }
@@ -154,8 +163,12 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
     //add names and ASU user ID
 	@Override
 	public void menuSelected(MenuEvent e) {
-		JOptionPane.showMessageDialog(frame, "Team Information:\nReanna Schnabel:  rmschnab"
-    			+ "\nJulie Houtman:  jhoutman");
+		JOptionPane.showMessageDialog(frame, "Team Information:" +
+                "\nReanna Schnabel:  rmschnab"
+    			+ "\nJulie Houtman:  jhoutman"
+                + "\nNick Morello: nvmorell"
+                + "\nLamanh Ngo: lemon"
+                + "\nAndrew Spicher: snake");
 	}
 
 

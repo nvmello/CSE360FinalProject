@@ -6,7 +6,12 @@ public class AddAttendance {
 	private String [][] attendance;
 	private String[] time;
 	private int extraNum,currentSize,rosterNum;
-	
+
+	/**
+	 *
+	 * @param csv
+	 * @param roster
+	 */
 	public void setAttendance(File csv,String [][] roster) {
 		String line,delimeter=",";
 		int row =0,rowNum=0;
@@ -35,10 +40,13 @@ public class AddAttendance {
 			io.printStackTrace();
 		}
 	}
-	
-	
-	
-	//returns the index of the found asu ID 
+
+	/**
+	 * returns the index of the found asu ID
+	 * @param roster
+	 * @param currentSize
+	 * @return
+	 */
 	public int search(String [][] roster,int currentSize) {
 			for(int j=0;j<roster.length;j++) {
 				if(attendance[currentSize][0].equals(roster[j][5])) {
@@ -48,7 +56,11 @@ public class AddAttendance {
 		
 		return (-1);
 	}
-	
+
+	/**
+	 *
+	 * @param roster
+	 */
 	public void timeArray(String [][] roster) {	
 		time = new String[roster.length];
 		int totalTime,search;
@@ -76,12 +88,19 @@ public class AddAttendance {
 		}
 		
 	}
-	
+
+	/**
+	 *
+	 */
 	public void extraUser() {
 		JOptionPane.showMessageDialog(null,"Data loaded for " + rosterNum + " users in the roster.\n"
 				+ extraNum + " additional attendee(s) found");
 	}
-	
+
+	/**
+	 *
+	 * @return
+	 */
 	public String [] getAttendance() {
 		return time;
 	}
