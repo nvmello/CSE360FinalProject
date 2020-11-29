@@ -160,10 +160,11 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
 
 
     //dialog box for the about section
+    //add names and ASU user ID
 	@Override
 	public void menuSelected(MenuEvent e) {
-		JOptionPane.showMessageDialog(jf, "Team Information:\n"
-    			+ "");
+		JOptionPane.showMessageDialog(jf, "Team Information:\nReanna Schnabel:  rmschnab"
+    			+ "\nJulie Houtman:  jhoutman");
 	}
 
 
