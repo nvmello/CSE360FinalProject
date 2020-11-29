@@ -25,7 +25,7 @@ public class LoadRoster {
         
         while((line = buffer.readLine()) != null) {	//reads until end of file
         	
-        	for (column =0;column < columnNum;column++) {
+        	for (column = 0;column < columnNum;column++) {
         		data[row] = line.split(delimeter);	//filling array with file info
         	}
         	

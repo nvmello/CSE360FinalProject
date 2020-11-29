@@ -12,6 +12,7 @@ import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 
 public class Menu extends JFrame implements ActionListener,MenuListener {
@@ -77,7 +78,6 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
 
     /**
      * Currently reads in a file path from the user when "Load Roster" button is clicked
-     * File path on Nicks PC for testing: " C:\Users\nvmor\Desktop\input1.csv "
      */
     public void actionPerformed(ActionEvent e) {
         if("Load Roster".equals(e.getActionCommand())){
@@ -92,7 +92,7 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
             int result = fileChooser.showOpenDialog(null);
             if(result == JFileChooser.APPROVE_OPTION) {
 
-                newRost.readCSV(fileChooser.getSelectedFile());	//passing in the selected file to be read
+                LoadRoster.readCSV(fileChooser.getSelectedFile());	//passing in the selected file to be read
             }
 
             String[] headers = {"ID","First Name","Last Name","Program","Academic Level","ASURITE"};
@@ -127,31 +127,24 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
         }
 
         if("Save".equals(e.getActionCommand())) {
-            File saveFile = chooser.getSelectedFile();
-            //writing to a file
-            int userSelection = chooser.showSaveDialog(this);
-            if (userSelection == JFileChooser.APPROVE_OPTION) {
-                File fileToSave = chooser.getSelectedFile();
-                try {
-                    FileWriter fw = new FileWriter(saveFile);
-                    BufferedWriter bw = new BufferedWriter(fw);
-                    for (int i = 0; i < table.getRowCount(); i++) {
-                        for (int j = 0; i < table.getColumnCount(); j++) {
-                            //writing
-                            bw.write(table.getValueAt(i, j).toString() + ",");
-                        }
-                        bw.newLine();//RECORD PER LINE
-                    }
-                    bw.close();
-                    fw.close();
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(this, "ERRPR", "ERROR MESSAGE", JOptionPane.ERROR_MESSAGE);
-                }
+            Scanner input = new Scanner(System.in);  // Create a Scanner object
+            Save mainSave = new Save();
+            newRost = new LoadRoster();  //Creates a new load roster obj
 
+
+            JFileChooser fileChooser = new JFileChooser(); //JFileChooser points to user's default directory
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Only .csv files","csv");
+            fileChooser.setFileFilter(filter);	//only allowing csv file extensions
+
+            int result = fileChooser.showOpenDialog(null);
+            if(result == JFileChooser.APPROVE_OPTION) {
+
+                mainSave.saveCSV(table, fileChooser.getSelectedFile().getAbsolutePath());
             }
+
         }
             if("Plot Data".equals(e.getActionCommand())){
-            System.out.println("It works!4");
+            System.out.println("It works!");
         }
         frame.setVisible(true);
     }
@@ -177,4 +170,9 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
 		
 		
 	}
+
+
+
 }
+
+
