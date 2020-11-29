@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,7 +7,6 @@ import java.io.IOException;
 import java.util.Scanner;  // Import the Scanner class
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
@@ -17,24 +15,25 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class Menu extends JFrame implements ActionListener,MenuListener {
-    JFrame jf;
-    JTable t; 
-    JScrollPane js;
-    JFileChooser fc;
+    JFrame frame;
+    JTable table;
+    JScrollPane scrollPane;
+    JFileChooser chooser;
     DefaultTableModel model;
     LoadRoster newRost;
     
     public Menu() {
-        jf = new JFrame();
-        jf.setTitle("CSE360 Final Project");
-        jf.setSize(500,500);
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jf.setVisible(true);
+        frame = new JFrame();
+        frame.setTitle("CSE360 Final Project");
+        frame.pack();
+        frame.setSize(500,500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        fc = new JFileChooser();
+
+        chooser = new JFileChooser();
 
         JMenuBar jmb = new JMenuBar();
-        jf.setJMenuBar(jmb);
+        frame.setJMenuBar(jmb);
 
         JMenu file = new JMenu("File");
         jmb.add(file);
@@ -67,8 +66,7 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
         file.add(plot);
         plot.setActionCommand("Plot Data");
         plot.addActionListener(this);
-
-
+        frame.setVisible(true);
 
     }
 
@@ -100,11 +98,11 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
             String[] headers = {"ID","First Name","Last Name","Program","Academic Level","ASURITE"};
 
             model = new DefaultTableModel(newRost.getData(),headers); //filling in the JTable with file info
-            t = new JTable(model);
+            table = new JTable(model);
             
-           js = new JScrollPane(t);
-           t.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-           jf.add(js);
+           scrollPane = new JScrollPane(table);
+           table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+           frame.add(scrollPane);
         }
 
         if("Add Attendance".equals(e.getActionCommand())){
@@ -129,18 +127,18 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
         }
 
         if("Save".equals(e.getActionCommand())) {
-            File saveFile = fc.getSelectedFile();
+            File saveFile = chooser.getSelectedFile();
             //writing to a file
-            int userSelection = fc.showSaveDialog(this);
+            int userSelection = chooser.showSaveDialog(this);
             if (userSelection == JFileChooser.APPROVE_OPTION) {
-                File fileToSave = fc.getSelectedFile();
+                File fileToSave = chooser.getSelectedFile();
                 try {
                     FileWriter fw = new FileWriter(saveFile);
                     BufferedWriter bw = new BufferedWriter(fw);
-                    for (int i = 0; i < t.getRowCount(); i++) {
-                        for (int j = 0; i < t.getColumnCount(); j++) {
+                    for (int i = 0; i < table.getRowCount(); i++) {
+                        for (int j = 0; i < table.getColumnCount(); j++) {
                             //writing
-                            bw.write(t.getValueAt(i, j).toString() + ",");
+                            bw.write(table.getValueAt(i, j).toString() + ",");
                         }
                         bw.newLine();//RECORD PER LINE
                     }
@@ -155,7 +153,7 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
             if("Plot Data".equals(e.getActionCommand())){
             System.out.println("It works!4");
         }
-
+        frame.setVisible(true);
     }
 
 
@@ -163,7 +161,7 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
     //add names and ASU user ID
 	@Override
 	public void menuSelected(MenuEvent e) {
-		JOptionPane.showMessageDialog(jf, "Team Information:\nReanna Schnabel:  rmschnab"
+		JOptionPane.showMessageDialog(frame, "Team Information:\nReanna Schnabel:  rmschnab"
     			+ "\nJulie Houtman:  jhoutman");
 	}
 
