@@ -147,7 +147,7 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
         }
             if("Plot Data".equals(e.getActionCommand())){
                 graph newGraph = new graph(table);
-                newGraph.setSize(800, 400);
+                newGraph.setSize(600, 400);
                 newGraph.setLocationRelativeTo(null);
                 newGraph.setVisible(true);
         }
