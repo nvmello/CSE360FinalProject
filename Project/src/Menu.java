@@ -9,9 +9,6 @@ import java.awt.event.KeyEvent;
 import java.util.Scanner;
 
 public class Menu extends JFrame implements ActionListener,MenuListener {
-
-
-
     JFrame frame;   //
     JTable table;   //
     JScrollPane scrollPane; //
@@ -164,7 +161,7 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
     			+ "\nJulie Houtman:  jhoutman"
                 + "\nNick Morello: nvmorell"
                 + "\nLamanh Ngo: llngo"
-                + "\nAndrew Spicher: snake");
+                + "\nAndrew Spicher: wspicher");
 	}
 
 

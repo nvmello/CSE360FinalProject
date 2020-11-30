@@ -18,18 +18,14 @@ public class graph extends JFrame{
                         "Percentage of Attendance",
                 "Total Number of Students", dataset);
 
-
         //Changes background color
         XYPlot plot = (XYPlot)chart.getPlot();
         plot.setBackgroundPaint(new Color(255,228,196));
 
-
         // Create Panel
         ChartPanel panel = new ChartPanel(chart);
         setContentPane(panel);
-
     }
-
 
     public XYDataset createDataset(JTable table){
         XYSeriesCollection dataset = new XYSeriesCollection();//the dataset
