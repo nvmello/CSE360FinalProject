@@ -1,19 +1,12 @@
 import javax.swing.*;
-import java.awt.event.KeyEvent;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;  // Import the Scanner class
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JFileChooser;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.util.Scanner;
 
 public class Menu extends JFrame implements ActionListener,MenuListener {
 
@@ -25,7 +18,7 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
     JFileChooser chooser;   //
     DefaultTableModel model;    //
     LoadRoster newRost;     //
-
+    private static final long serialVersionUID = 6294689542092367723L;
     /**
      *
      */
@@ -153,7 +146,10 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
 
         }
             if("Plot Data".equals(e.getActionCommand())){
-            System.out.println("It works!");
+                graph newGraph = new graph(table);
+                newGraph.setSize(800, 400);
+                newGraph.setLocationRelativeTo(null);
+                newGraph.setVisible(true);
         }
         frame.setVisible(true);
     }
@@ -167,7 +163,7 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
                 "\nReanna Schnabel:  rmschnab"
     			+ "\nJulie Houtman:  jhoutman"
                 + "\nNick Morello: nvmorell"
-                + "\nLamanh Ngo: lemon"
+                + "\nLamanh Ngo: llngo"
                 + "\nAndrew Spicher: snake");
 	}
 
