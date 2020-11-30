@@ -1,3 +1,5 @@
+import javafx.scene.control.DatePicker;
+
 import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
@@ -9,12 +11,12 @@ import java.awt.event.KeyEvent;
 import java.util.Scanner;
 
 public class Menu extends JFrame implements ActionListener,MenuListener {
-    JFrame frame;   //
-    JTable table;   //
-    JScrollPane scrollPane; //
-    JFileChooser chooser;   //
-    DefaultTableModel model;    //
-    LoadRoster newRost;     //
+    JFrame frame;
+    JTable table;
+    JScrollPane scrollPane;
+    JFileChooser chooser;
+    DefaultTableModel model;
+    LoadRoster newRost;
     private static final long serialVersionUID = 6294689542092367723L;
     /**
      *
@@ -116,10 +118,12 @@ public class Menu extends JFrame implements ActionListener,MenuListener {
                 newAtt.setAttendance(fileChooser.getSelectedFile(),newRost.getData());
             }
             
-            //Replace this with a date picker
+//            Replace this with a date picker
             String date = JOptionPane.showInputDialog("DATE");
-            
-            String []newColumn = newAtt.getAttendance();
+
+
+
+                    String[]newColumn = newAtt.getAttendance();
             model.addColumn(date,newColumn);	//add a new column to the JTable with the specified date
             newAtt.extraUser();		//showing the user attendee information was loaded
             
